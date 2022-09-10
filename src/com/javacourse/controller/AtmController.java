@@ -25,12 +25,12 @@ public class AtmController {
         this.userInterface = userInterface;
     }
 
-    public void init() {
+    public void init() throws InterruptedException {
         this.dataProcessor.initialize();
         processMenuOption();
     }
 
-    public static void processMenuOption() {
+    public static void processMenuOption() throws InterruptedException {
         showOptionPrompt();
         final String userInput = getUserInput();
         int mainMenuSelectionOption = 0;

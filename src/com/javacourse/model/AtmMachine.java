@@ -5,6 +5,7 @@ import com.javacourse.user.User;
 
 import java.util.List;
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
 import static com.javacourse.controller.AtmController.processMenuOption;
 import static com.javacourse.model.DataProcessor.initMainMenu;
@@ -16,7 +17,7 @@ public class AtmMachine {
     static Scanner input = new Scanner(System.in);
     static Scanner menuInput = new Scanner(System.in);
     
-    public static void login() {
+    public static void login() throws InterruptedException {
 
         // Retry to Enter credentials
         int retry = 0;
@@ -48,7 +49,7 @@ public class AtmMachine {
 
     }
 
-    public static void signup() {
+    public static void signup() throws InterruptedException {
         print("Enter FullName of user:", false);
         final String fullName = getUserInput();
 
@@ -87,7 +88,7 @@ public class AtmMachine {
 
     }
 
-    public static void processAccount(String userName) {
+    public static void processAccount(String userName) throws InterruptedException {
         print("Account Options: ", true);
         print("", true);
         final List<String> accountMenuOptions = mapOptionToIndex(accountOptions);
@@ -191,7 +192,7 @@ public class AtmMachine {
 
     }
 
-    public static void updateSettings(String userName) {
+    public static void updateSettings(String userName) throws InterruptedException {
         print("Account Setting: ", true);
 
         print("[1] - Update User Name",true);
@@ -246,8 +247,11 @@ public class AtmMachine {
         }
     }
 
-    public static void logout() {
+    public static void logout() throws InterruptedException {
         print("Thank You for using this ATM, bye.",true);
+        // Add 3 seconds delay between flushing the screen
+        TimeUnit.SECONDS.sleep(3);
+        flushScreen();
         showWelcomeMessage();
         initMainMenu();
         processMenuOption();
